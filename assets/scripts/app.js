@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
-var Table = require('cli-table');
-// cTable = require('console.table');
+// var Table = require('cli-table');
+cTable = require('console.table');
 var mysql = require("mysql");
 let config = require('./config');
 
@@ -9,37 +9,21 @@ connection.connect(function (err) {
 	if (err) throw err;
 	console.log("connected as id " + connection.threadId + "\n");
 	view.displayMenu();
-	// view.displayTable();
 });
 
 var view = {
-	displayTable: function (res) {
-		var table = new Table({
-			head: ['ID', 'PRODUCT', 'DEPARTMENT', 'PRICE', 'QTY'],
-			colWidths: [5, 15, 15, 10, 5]
-		});
+	displayTable: function () {
 		var sql = "SELECT * FROM products";
-		var data = connection.query(sql, function (err, res) {
+		connection.query(sql, function (err, res) {
 			if (err) throw err;
-			for (let i = 0; i < res.length; i++) {
-				var results = [res[i].id,
-					res[i].product_name,
-					res[i].department_name,
-					res[i].price,
-					res[i].stock_quantity
-				]
-			};
-			return results;
-			// console.log(results);
+			console.table(res);
 		});
-		table.push(data);
-		console.log(table.toString());
 	},
 	displayMenu: function () {
 		inquirer.prompt([{
 			type: "list",
 			message: "Please select a command",
-			choices: ["buy", "sell", "update-price", "delete-item", "exit"],
+			choices: ["buy", "sell", "update-price", "exit"],
 			name: "command"
 		}, ])
 		.then(function (inquirerResponse) {
@@ -50,8 +34,6 @@ var view = {
 				app.sell();
 			} else if (input === "update-price") {
 				app.updatePrice();
-			} else if (input === "delete-item") {
-				app.deleteItem();
 			} else if (input === "exit") {
 				connection.end();
 			}
@@ -76,7 +58,6 @@ var query = {
 		var sql = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?";
 		var data = [input, id];
 		query.runQuery(sql, data);
-		view.displayTable()
 	},
 	sell: function (id, input) {
 		var sql = "UPDATE products SET stock_quantity = stock_quantity + ? WHERE id = ?";
@@ -116,6 +97,7 @@ var app = {
 	 ])
 		.then(function (data) {
 			query.buy(data.id, data.qty);
+			view.displayMenu();
 		})
 	},
 	sell: function () {
@@ -135,6 +117,8 @@ var app = {
 		])
 		.then(function (data) {
 			query.sell(data.id, data.qty);
+			view.displayMenu();
+
 		})
 	},
 	updatePrice: function () {
@@ -154,9 +138,7 @@ var app = {
 	 ])
 		.then(function (data) {
 			query.updatePrice(data.id, data.price);
+			view.displayMenu();
 		})
-	},
-	deleteItem: function () {
-		console.log('delete menu selected')
 	},
 };
