@@ -1,12 +1,14 @@
 # webstore-sim
 
 An application that simulates a terminal web store.
+
 Fully integrated with MySQL backend and live updating inventory via node.
 
 ## How to use
 
 ### Requirements:
 MySQL Workbench : https://dev.mysql.com/downloads/workbench/
+
 Prepopulate your MySQL database with the code in bamazon.sql
 
 ### How to Run:
