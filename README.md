@@ -21,3 +21,11 @@ Prepopulate your MySQL database with the code in [bamazon.sql](https://github.co
 
 ![](http://g.recordit.co/HxIrZu9xQj.gif)
 
+
+## Built with
+
+inquirer
+mysql
+console.table
+npm
+node.js
