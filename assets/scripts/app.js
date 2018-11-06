@@ -1,15 +1,37 @@
-var inquirer = require("inquirer");
-// var Table = require('cli-table');
+const inquirer = require("inquirer");
+const mysql = require("mysql");
+const config = require('./config');
 cTable = require('console.table');
-var mysql = require("mysql");
-let config = require('./config');
 
-var connection = mysql.createConnection(config);
+const connection = mysql.createConnection(config);
 connection.connect(function (err) {
 	if (err) throw err;
 	console.log("connected as id " + connection.threadId + "\n");
-	view.displayMenu();
+	view.displayTable();
 });
+
+//Inquirer npm constructor
+function Inquirer(type, message, name) {
+	this.type = type;
+	this.message = message;
+	this.name = name;
+};
+Inquirer.prototype.printPrompt = function() {
+	return {
+		type: this.type,
+		message: "What item would you like to " + this.message + "?",
+		name: this.name,
+		validate: app.validate,
+	}
+};
+Inquirer.prototype.printQTY = function() {
+	return {
+		type: this.type,
+		message: "Input amount",
+		name: this.name,
+		validate: app.validate,
+	}
+};
 
 var view = {
 	displayTable: function () {
@@ -17,6 +39,7 @@ var view = {
 		connection.query(sql, function (err, res) {
 			if (err) throw err;
 			console.table(res);
+			view.displayMenu();
 		});
 	},
 	displayMenu: function () {
@@ -46,7 +69,7 @@ var query = {
 	runQuery: function (sql, data) {
 		connection.query(sql, data, function (err, res) {
 			if (err) throw err;
-			view.displayTable()
+			view.displayTable();
 		});
 	}, 		
 	display: function (input) {
@@ -71,6 +94,7 @@ var query = {
 	},
 };
 
+
 var app = {
 	validate: function (input) {
 		if (input.length < 1) {
@@ -81,64 +105,36 @@ var app = {
 		}
 	},
 	buy: function () {
+		var inputID = new Inquirer("input", "buy", "id");
+		var inputQTY = new Inquirer("input", "buy", "qty");
 		inquirer.prompt([
-			{
-				type: "input",
-				message: "What item would you like to buy?",
-				name: "id",
-				validate: app.validate,
-			},
-			{
-				type: "input",
-				message: "How many?",
-				name: "qty",
-				validate: app.validate,
-			}
+			inputID.printPrompt(),
+			inputQTY.printQTY(),
 	 ])
 		.then(function (data) {
 			query.buy(data.id, data.qty);
-			view.displayMenu();
 		})
 	},
 	sell: function () {
+		var inputID = new Inquirer("input", "sell", "id");
+		var inputQTY = new Inquirer("input", "sell", "qty");
 		inquirer.prompt([
-			{
-				type: "input",
-				message: "What item would you like to sell?",
-				name: "id",
-				validate: app.validate,
-			},
-			{
-				type: "input",
-				message: "How many?",
-				name: "qty",
-				validate: app.validate,
-			}
+			inputID.printPrompt(),
+			inputQTY.printQTY(),
 		])
 		.then(function (data) {
 			query.sell(data.id, data.qty);
-			view.displayMenu();
-
 		})
 	},
 	updatePrice: function () {
+		var inputID = new Inquirer("input", "price update", "id");
+		var inputQTY = new Inquirer("input", "update", "price");
 		inquirer.prompt([
-			{
-				type: "input",
-				message: "What item would you like to update?",
-				name: "id",
-				validate: app.validate,
-			},
-			{
-				type: "input",
-				message: "Input new price?",
-				name: "price",
-				validate: app.validate,
-			}
+			inputID.printPrompt(),
+			inputQTY.printQTY(),
 	 ])
 		.then(function (data) {
 			query.updatePrice(data.id, data.price);
-			view.displayMenu();
 		})
 	},
 };
