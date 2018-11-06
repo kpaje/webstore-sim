@@ -16,7 +16,7 @@ function Inquirer(type, message, name) {
 	this.message = message;
 	this.name = name;
 };
-Inquirer.prototype.printPrompt = function() {
+Inquirer.prototype.printPrompt = function () {
 	return {
 		type: this.type,
 		message: "What item would you like to " + this.message + "?",
@@ -24,7 +24,7 @@ Inquirer.prototype.printPrompt = function() {
 		validate: app.validate,
 	}
 };
-Inquirer.prototype.printQTY = function() {
+Inquirer.prototype.printQTY = function () {
 	return {
 		type: this.type,
 		message: "Input amount",
@@ -44,23 +44,23 @@ var view = {
 	},
 	displayMenu: function () {
 		inquirer.prompt([{
-			type: "list",
-			message: "Please select a command",
-			choices: ["buy", "sell", "update-price", "exit"],
-			name: "command"
-		}, ])
-		.then(function (inquirerResponse) {
-			var input = inquirerResponse.command
-			if (input === "buy") {
-				app.buy();
-			} else if (input === "sell") {
-				app.sell();
-			} else if (input === "update-price") {
-				app.updatePrice();
-			} else if (input === "exit") {
-				connection.end();
-			}
-		});
+				type: "list",
+				message: "Please select a command",
+				choices: ["buy", "sell", "update-price", "exit"],
+				name: "command"
+			}, ])
+			.then(function (inquirerResponse) {
+				var input = inquirerResponse.command
+				if (input === "buy") {
+					app.buy();
+				} else if (input === "sell") {
+					app.sell();
+				} else if (input === "update-price") {
+					app.updatePrice();
+				} else if (input === "exit") {
+					connection.end();
+				}
+			});
 	},
 }
 
@@ -71,7 +71,7 @@ var query = {
 			if (err) throw err;
 			view.displayTable();
 		});
-	}, 		
+	},
 	display: function (input) {
 		var sql = "SELECT * FROM products WHERE id = ?";
 		var data = [input];
@@ -108,33 +108,33 @@ var app = {
 		var inputID = new Inquirer("input", "buy", "id");
 		var inputQTY = new Inquirer("input", "buy", "qty");
 		inquirer.prompt([
-			inputID.printPrompt(),
-			inputQTY.printQTY(),
-	 ])
-		.then(function (data) {
-			query.buy(data.id, data.qty);
-		})
+				inputID.printPrompt(),
+				inputQTY.printQTY(),
+			])
+			.then(function (data) {
+				query.buy(data.id, data.qty);
+			})
 	},
 	sell: function () {
 		var inputID = new Inquirer("input", "sell", "id");
 		var inputQTY = new Inquirer("input", "sell", "qty");
 		inquirer.prompt([
-			inputID.printPrompt(),
-			inputQTY.printQTY(),
-		])
-		.then(function (data) {
-			query.sell(data.id, data.qty);
-		})
+				inputID.printPrompt(),
+				inputQTY.printQTY(),
+			])
+			.then(function (data) {
+				query.sell(data.id, data.qty);
+			})
 	},
 	updatePrice: function () {
 		var inputID = new Inquirer("input", "price update", "id");
 		var inputQTY = new Inquirer("input", "update", "price");
 		inquirer.prompt([
-			inputID.printPrompt(),
-			inputQTY.printQTY(),
-	 ])
-		.then(function (data) {
-			query.updatePrice(data.id, data.price);
-		})
+				inputID.printPrompt(),
+				inputQTY.printQTY(),
+			])
+			.then(function (data) {
+				query.updatePrice(data.id, data.price);
+			})
 	},
 };
