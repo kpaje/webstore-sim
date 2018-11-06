@@ -11,7 +11,7 @@ MySQL Workbench : https://dev.mysql.com/downloads/workbench/
 
 Prepopulate your MySQL database with the code in [bamazon.sql](https://github.com/kpaje/webstore-sim/blob/master/assets/data/bamazon.sql)
 
-### How to Run:
+### Run commands in terminal:
 
 	git clone git@github.com:kpaje/webstore-sim.git
 	cd ../webstore-sim/assets/scripts
