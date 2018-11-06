@@ -11,7 +11,7 @@ MySQL Workbench : https://dev.mysql.com/downloads/workbench/
 ### How to Run:
 
 	git clone git@github.com:kpaje/webstore-sim.git
-	cd webstore-sim/assets/scripts
+	cd ../webstore-sim/assets/scripts
 	npm install
 	node app.js
 
