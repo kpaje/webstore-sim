@@ -16,5 +16,5 @@ MySQL Workbench : https://dev.mysql.com/downloads/workbench/
 	node app.js
 
 
-![](http://g.recordit.co/DOmTlEM2MK.gif)
+![](http://g.recordit.co/HxIrZu9xQj.gif)
 
