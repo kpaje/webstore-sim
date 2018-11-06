@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
+const colors = require('colors');
 const config = require('./config');
 cTable = require('console.table');
 
@@ -10,31 +11,10 @@ connection.connect(function (err) {
 	view.displayTable();
 });
 
-//Inquirer npm constructor
-function Inquirer(type, message, name) {
-	this.type = type;
-	this.message = message;
-	this.name = name;
-};
-Inquirer.prototype.printPrompt = function () {
-	return {
-		type: this.type,
-		message: "What item would you like to " + this.message + "?",
-		name: this.name,
-		validate: app.validate,
-	}
-};
-Inquirer.prototype.printQTY = function () {
-	return {
-		type: this.type,
-		message: "Input amount",
-		name: this.name,
-		validate: app.validate,
-	}
-};
-
 var view = {
 	displayTable: function () {
+		console.clear();
+		console.log("WELCOME TO THE BAMAZON STORE 1998" .magenta)
 		var sql = "SELECT * FROM products";
 		connection.query(sql, function (err, res) {
 			if (err) throw err;
@@ -63,7 +43,6 @@ var view = {
 			});
 	},
 }
-
 
 var query = {
 	runQuery: function (sql, data) {
@@ -94,11 +73,33 @@ var query = {
 	},
 };
 
+//Inquirer npm constructor
+function Inquirer(type, message, name) {
+	this.type = type;
+	this.message = message;
+	this.name = name;
+};
+Inquirer.prototype.printPrompt = function () {
+	return {
+		type: this.type,
+		message: "What item would you like to " + this.message + "?",
+		name: this.name,
+		validate: app.validate,
+	}
+};
+Inquirer.prototype.printQTY = function () {
+	return {
+		type: this.type,
+		message: "Input amount",
+		name: this.name,
+		validate: app.validate,
+	}
+};
 
 var app = {
 	validate: function (input) {
 		if (input.length < 1) {
-			console.log("missing input")
+			console.log("missing input" .red)
 			return false;
 		} else {
 			return true;
