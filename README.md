@@ -24,8 +24,8 @@ Prepopulate your MySQL database with the code in [bamazon.sql](https://github.co
 
 ## Built with
 
-inquirer
-mysql
-console.table
-npm
-node.js
+* inquirer https://www.npmjs.com/package/inquirer/v/5.0.1
+* mysql https://www.mysql.com/
+* console.table https://www.npmjs.com/package/console.table
+* npm https://www.npmjs.com/
+* node.js https://nodejs.org/en/
