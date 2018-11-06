@@ -1,3 +1,5 @@
 # webstore-sim
 
-http://g.recordit.co/DOmTlEM2MK.gif
+An application that simulates a terminal web store.
+
+![]http://g.recordit.co/DOmTlEM2MK.gif
