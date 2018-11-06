@@ -7,6 +7,7 @@ Fully integrated with MySQL backend and live updating inventory via node.
 
 ### Requirements:
 MySQL Workbench : https://dev.mysql.com/downloads/workbench/
+Prepopulate your MySQL database with the code in bamazon.sql
 
 ### How to Run:
 
