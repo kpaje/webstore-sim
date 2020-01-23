@@ -1,71 +1,33 @@
-const mysql = require("mysql");
-const config = require("./config");
-const inquirer = require("inquirer");
-
-const connection = mysql.createConnection(config);
-connection.connect(function(err) {
-  if (err) throw err;
-  view.displayApp();
-});
-
-var view = {
-  displayApp: function() {
-    console.clear();
-    console.log("WELCOME TO THE BAMAZON STORE 1998".magenta);
-    connection.query("SELECT * FROM products", function(err, res) {
-      if (err) throw err;
-      console.table(res);
-      view.displayMenu();
-    });
-  },
-  displayMenu: function() {
-    inquirer
-      .prompt([
-        {
-          type: "list",
-          message: "Please select a command",
-          choices: ["buy", "sell", "update-price", "exit"],
-          name: "command"
-        }
-      ])
-      .then(function(response) {
-        var input = response.command;
-        if (input === "buy") {
-          app.buy();
-        } else if (input === "sell") {
-          app.sell();
-        } else if (input === "update-price") {
-          app.updatePrice();
-        } else if (input === "exit") {
-          connection.end();
-        }
-      });
-  }
-};
+const view = require("./view");
+const connection = require("./connection");
 
 var query = {
-  runQuery: function(sql, data) {
-    connection.query(sql, data, function(err, res) {
+  sqlBuy:
+    "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?",
+  sqlSell:
+    "UPDATE products SET stock_quantity = stock_quantity + ? WHERE id = ?",
+  sqlUpdatePrice: "UPDATE products SET price = ? WHERE id = ?",
+
+  runQuery: function(sql, data, viewResult) {
+    connection.query(sql, data, function(err) {
       if (err) throw err;
-      view.displayApp();
+      viewResult();
     });
   },
   buy: function(id, input) {
-    var sql =
-      "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?";
+    var sql = query.sqlBuy;
     var data = [input, id];
-    query.runQuery(sql, data);
+    query.runQuery(sql, data, view.displayTable);
   },
   sell: function(id, input) {
-    var sql =
-      "UPDATE products SET stock_quantity = stock_quantity + ? WHERE id = ?";
+    var sql = query.sqlSell;
     var data = [input, id];
-    query.runQuery(sql, data);
+    query.runQuery(sql, data, view.displayTable);
   },
   updatePrice: function(id, input) {
-    var sql = "UPDATE products SET price = ? WHERE id = ?";
+    var sql = query.sqlUpdatePrice;
     var data = [input, id];
-    query.runQuery(sql, data);
+    query.runQuery(sql, data, view.displayTable);
   }
 };
 

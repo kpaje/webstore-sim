@@ -1,29 +1,35 @@
 const inquirer = require("inquirer");
+const query = require("./query");
+const Prompt = require("./prompts");
 
-class Inquirer {
-  constructor(message, name) {
-    this.message = message;
-    this.name = name;
+const inputBuy = new Prompt("buy");
+const inputSell = new Prompt("sell");
+const inputUpdate = new Prompt("price update");
+const inputQTY = new Prompt(undefined, "qty");
+const inputPrice = new Prompt(undefined, "price");
+
+var inquire = {
+  buy: function() {
+    inquirer
+      .prompt([inputBuy.promptID(), inputQTY.promptQTY()])
+      .then(function(data) {
+        query.buy(data.id, data.qty);
+      });
+  },
+  sell: function() {
+    inquirer
+      .prompt([inputSell.promptID(), inputQTY.promptQTY()])
+      .then(function(data) {
+        query.sell(data.id, data.qty);
+      });
+  },
+  updatePrice: function() {
+    inquirer
+      .prompt([inputUpdate.promptID(), inputPrice.promptQTY()])
+      .then(function(data) {
+        query.updatePrice(data.id, data.price);
+      });
   }
-  promptID() {
-    return {
-      type: "input",
-      message: "What item would you like to " + `${this.message}` + "?",
-      name: "id",
-      validate: app.validateInput
-    };
-  }
-  promptQTY() {
-    return {
-      type: "input",
-      message: "Input amount",
-      name: `${this.name}`,
-      validate: app.validateInput
-    };
-  }
-}
-const inputBuy = new Inquirer("buy");
-const inputSell = new Inquirer("sell");
-const inputUpdate = new Inquirer("price update");
-const inputQTY = new Inquirer(undefined, "qty");
-const inputPrice = new Inquirer(undefined, "price");
+};
+
+module.exports = inquire;
