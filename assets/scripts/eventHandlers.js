@@ -14,13 +14,13 @@ var eventHandlers = {
   routeInput: function(response) {
     response = response.command;
     if (response === "buy") {
-      inquire.buy;
+      inquire.buy();
     } else if (response === "sell") {
-      inquire.sell;
+      inquire.sell();
     } else if (response === "update-price") {
-      inquire.updatePrice;
+      inquire.updatePrice();
     } else if (response === "exit") {
-      connection.end;
+      connection.end();
     }
   },
   inputResponse: function(response) {

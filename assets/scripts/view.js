@@ -27,7 +27,7 @@ var view = {
     });
   },
   displayMenu: function() {
-    inquirer.prompt(view.menuOptions).then(eventHandlers.routeInput);
+    inquirer.prompt(view.menuOptions).then(eventHandlers.inputResponse);
   },
   displayTable: function() {
     console.clear();

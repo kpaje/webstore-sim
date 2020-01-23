@@ -1,5 +1,13 @@
 const view = require("./view");
-const connection = require("./connection");
+const mysql = require("mysql");
+const config = require("./config");
+// const connection = require("./connection");
+
+const connection = mysql.createConnection(config);
+connection.connect(function(err) {
+  if (err) throw err;
+  view.displayTable;
+});
 
 var query = {
   sqlBuy:
@@ -11,7 +19,7 @@ var query = {
   runQuery: function(sql, data, viewResult) {
     connection.query(sql, data, function(err) {
       if (err) throw err;
-      viewResult();
+      viewResult;
     });
   },
   buy: function(id, input) {
