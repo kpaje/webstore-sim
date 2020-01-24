@@ -11,11 +11,11 @@ export const sqlQuery = {
 	all: function() {
 		const sql = "SELECT * FROM products";
 		return new Promise(function(resolve, reject) {
-			connection.query(sql, function(err, rows) {
-				if (rows === undefined) {
-					reject(new Error("Error rows is undefined"));
+			connection.query(sql, function(err, res) {
+				if (res === undefined) {
+					reject(new Error("Error res is undefined"));
 				} else {
-					resolve(rows);
+					resolve(res);
 				}
 			});
 		});
