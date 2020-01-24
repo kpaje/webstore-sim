@@ -8,7 +8,7 @@ import {
 	inputQTY,
 	inputPrice
 } from "./prompts";
-import { views } from "./views";
+import views from "./views";
 
 export const inquire = {
 	routeInput: function(response) {
@@ -22,6 +22,11 @@ export const inquire = {
 		} else if (input === "exit") {
 			connection.end();
 		}
+	},
+	createMenuPrompts: function() {
+		return new Promise(function(populateMenu) {
+			inquirer.prompt(populateMenu).then(this.routeInput());
+		});
 	},
 	buy: function() {
 		inquirer

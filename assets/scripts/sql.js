@@ -1,6 +1,5 @@
 import connection from "./config";
 import "console.table";
-import { views } from "./views";
 
 export const sqlQuery = {
 	runQuery: function(sql, data) {
@@ -20,7 +19,6 @@ export const sqlQuery = {
 			});
 		});
 	},
-
 	buy: function(id, input) {
 		const sql =
 			"UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?";

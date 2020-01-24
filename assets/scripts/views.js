@@ -1,41 +1,28 @@
 const inquirer = require("inquirer");
-import connection from "./config";
 import "console.table";
 import { inquire } from "./inquire";
 import { sqlQuery } from "./sql";
 
-export const views = {
+const views = {
 	globalUI: function() {
 		console.clear();
 		console.log("WELCOME TO THE BAMAZON STORE 1998".magenta);
 		sqlQuery.all().then(function(res) {
 			console.table(res);
-			createMenu();
+			views.menuUI();
 		});
 	},
-	createMenu: function() {
-		inquirer
-			.prompt([
-				{
-					type: "list",
-					message: "Please select a command",
-					choices: ["buy", "sell", "update-price", "exit"],
-					name: "command"
-				}
-			])
-			.then(inquire.routeInput);
-	}
-};
-
-export function createMenu() {
-	inquirer
-		.prompt([
+	menuUI: function() {
+		const populateMenu = [
 			{
 				type: "list",
 				message: "Please select a command",
 				choices: ["buy", "sell", "update-price", "exit"],
 				name: "command"
 			}
-		])
-		.then(inquire.routeInput);
-}
+		];
+		inquirer.prompt(populateMenu).then(inquire.routeInput);
+	}
+};
+
+export default views;
