@@ -8,8 +8,8 @@ export const views = {
 	globalUI: function() {
 		console.clear();
 		console.log("WELCOME TO THE BAMAZON STORE 1998".magenta);
-		const res = sqlQuery.all().then(function(results) {
-			console.table(results);
+		sqlQuery.all().then(function(res) {
+			console.table(res);
 			createMenu();
 		});
 	},
