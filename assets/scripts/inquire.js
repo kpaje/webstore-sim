@@ -23,10 +23,8 @@ export const inquire = {
 			connection.end();
 		}
 	},
-	createMenuPrompts: function() {
-		return new Promise(function(populateMenu) {
-			inquirer.prompt(populateMenu).then(this.routeInput());
-		});
+	createMenuPrompts: function(populateMenu) {
+		return inquirer.prompt(populateMenu).then(inquire.routeInput);
 	},
 	buy: function() {
 		inquirer

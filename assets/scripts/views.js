@@ -1,4 +1,3 @@
-const inquirer = require("inquirer");
 import "console.table";
 import { inquire } from "./inquire";
 import { sqlQuery } from "./sql";
@@ -21,7 +20,7 @@ const views = {
 				name: "command"
 			}
 		];
-		inquirer.prompt(populateMenu).then(inquire.routeInput);
+		inquire.createMenuPrompts(populateMenu);
 	}
 };
 
