@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
-import { sql } from "./sql";
+import connection from "./config";
+import { sqlQuery } from "./sql";
 import {
 	inputBuy,
 	inputSell,
@@ -7,31 +8,43 @@ import {
 	inputQTY,
 	inputPrice
 } from "./prompts";
-import { interfaceUI } from "./views";
+import { views } from "./views";
 
 export const inquire = {
+	routeInput: function(response) {
+		var input = response.command;
+		if (input === "buy") {
+			inquire.buy();
+		} else if (input === "sell") {
+			inquire.sell();
+		} else if (input === "update-price") {
+			inquire.updatePrice();
+		} else if (input === "exit") {
+			connection.end();
+		}
+	},
 	buy: function() {
 		inquirer
 			.prompt([inputBuy.promptID(), inputQTY.promptQTY()])
 			.then(function(data) {
-				sql.buy(data.id, data.qty);
-				interfaceUI();
+				sqlQuery.buy(data.id, data.qty);
+				views.globalUI();
 			});
 	},
 	sell: function() {
 		inquirer
 			.prompt([inputSell.promptID(), inputQTY.promptQTY()])
 			.then(function(data) {
-				sql.sell(data.id, data.qty);
-				interfaceUI();
+				sqlQuery.sell(data.id, data.qty);
+				views.globalUI();
 			});
 	},
 	updatePrice: function() {
 		inquirer
 			.prompt([inputUpdate.promptID(), inputPrice.promptQTY()])
 			.then(function(data) {
-				sql.updatePrice(data.id, data.price);
-				interfaceUI();
+				sqlQuery.updatePrice(data.id, data.price);
+				views.globalUI();
 			});
 	}
 };

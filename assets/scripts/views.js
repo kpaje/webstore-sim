@@ -1,19 +1,33 @@
-import connection from "./config";
 const inquirer = require("inquirer");
+import connection from "./config";
 import "console.table";
 import { inquire } from "./inquire";
+import { sqlQuery } from "./sql";
 
-export function interfaceUI() {
-	console.clear();
-	console.log("WELCOME TO THE BAMAZON STORE 1998".magenta);
-	connection.query("SELECT * FROM products", function(err, res) {
-		if (err) throw err;
-		console.table(res);
-		displayMenu();
-	});
-}
+export const views = {
+	globalUI: function() {
+		console.clear();
+		console.log("WELCOME TO THE BAMAZON STORE 1998".magenta);
+		const res = sqlQuery.all().then(function(results) {
+			console.table(results);
+			createMenu();
+		});
+	},
+	createMenu: function() {
+		inquirer
+			.prompt([
+				{
+					type: "list",
+					message: "Please select a command",
+					choices: ["buy", "sell", "update-price", "exit"],
+					name: "command"
+				}
+			])
+			.then(inquire.routeInput);
+	}
+};
 
-function displayMenu() {
+export function createMenu() {
 	inquirer
 		.prompt([
 			{
@@ -23,16 +37,5 @@ function displayMenu() {
 				name: "command"
 			}
 		])
-		.then(function(response) {
-			var input = response.command;
-			if (input === "buy") {
-				inquire.buy();
-			} else if (input === "sell") {
-				inquire.sell();
-			} else if (input === "update-price") {
-				inquire.updatePrice();
-			} else if (input === "exit") {
-				connection.end();
-			}
-		});
+		.then(inquire.routeInput);
 }
