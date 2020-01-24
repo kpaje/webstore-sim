@@ -1,7 +1,7 @@
 import connection from "./config";
 const inquirer = require("inquirer");
 import "console.table";
-import { inquire } from "./app";
+import { inquire } from "./inquire";
 
 export function interfaceUI() {
 	console.clear();
