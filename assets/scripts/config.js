@@ -1,4 +1,6 @@
-var config = {
+const mysql = require("mysql");
+
+const config = {
 	host: "localhost",
 	port: 3306,
 	user: "root",
@@ -6,4 +8,6 @@ var config = {
 	database: "bamazon_DB"
 };
 
-module.exports = config;
+const connection = mysql.createConnection(config);
+
+export default connection;
