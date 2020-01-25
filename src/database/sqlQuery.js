@@ -1,5 +1,5 @@
 import connection from "./connection";
-import Mutation from "./Mutation";
+import { queryBuy, querySell, queryUpdatePrice } from "./mutation/mutations";
 
 const sqlQuery = {
   allData: function() {
@@ -15,18 +15,13 @@ const sqlQuery = {
     });
   },
   buy: function(id, input) {
-    const sql =
-      "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?";
-    new Mutation(sql).createSQLQuery(id, input);
+    queryBuy(id, input);
   },
   sell: function(id, input) {
-    const sql =
-      "UPDATE products SET stock_quantity = stock_quantity + ? WHERE id = ?";
-    new Mutation(sql).createSQLQuery(id, input);
+    querySell(id, input);
   },
   updatePrice: function(id, input) {
-    const sql = "UPDATE products SET price = ? WHERE id = ?";
-    new Mutation(sql).createSQLQuery(id, input);
+    queryUpdatePrice(id, input);
   }
 };
 
