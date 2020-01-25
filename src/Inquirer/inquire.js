@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 import connection from "../database/config";
-import { sqlQuery } from "../database/sql";
+import { sqlQuery } from "../database/sqlQuery";
 import {
   inputBuy,
   inputSell,

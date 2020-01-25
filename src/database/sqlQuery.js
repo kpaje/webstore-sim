@@ -19,10 +19,9 @@ export const sqlQuery = {
       });
     });
   },
-  populateAllData: function(table, menu) {
+  populateAllData: function(table) {
     this.allData().then(function(res) {
       table(res);
-      menu();
     });
   },
   buy: function(id, input) {

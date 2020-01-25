@@ -7,7 +7,7 @@ function createMenuPrompts(populateMenu) {
 }
 
 function menuUI() {
-  createMenuPrompts(inputMenu.promptMenu());
+  return createMenuPrompts(inputMenu.promptMenu());
 }
 
 export default menuUI;
