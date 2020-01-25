@@ -1,8 +1,8 @@
 import "console.table";
-import { sqlQuery } from "../database/sqlQuery";
+import eventHandlers from "../eventHandlers";
 
 function table() {
-  return sqlQuery.populateAllData(console.table);
+  return eventHandlers.populateTableData(console.table);
 }
 
 export default table;

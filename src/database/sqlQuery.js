@@ -19,11 +19,6 @@ export const sqlQuery = {
       });
     });
   },
-  populateAllData: function(table) {
-    this.allData().then(function(res) {
-      table(res);
-    });
-  },
   buy: function(id, input) {
     const sql =
       "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?";
