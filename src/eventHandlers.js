@@ -1,6 +1,6 @@
 import "colors";
-import { sqlQuery } from "./database/sqlQuery";
-import { inquire } from "./Inquirer/inquire";
+import sqlQuery from "./database/sqlQuery";
+import inquire from "./Inquirer/inquire";
 import connection from "./database/connection";
 
 const eventHandlers = {

@@ -1,6 +1,6 @@
 import connection from "./connection";
 
-export const sqlQuery = {
+const sqlQuery = {
   runQuery: function(sql, data) {
     connection.query(sql, data, function(err, res) {
       if (err) throw err;
@@ -37,3 +37,5 @@ export const sqlQuery = {
     this.runQuery(sql, data);
   }
 };
+
+export default sqlQuery;
