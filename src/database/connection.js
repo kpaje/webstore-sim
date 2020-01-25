@@ -1,11 +1,13 @@
 import mysql from "mysql";
-import config from "./config";
-import view from "../views";
+
+const config = {
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "password",
+  database: "bamazon_DB"
+};
 
 const connection = mysql.createConnection(config);
-connection.connect(function(err) {
-  if (err) throw err;
-  view.displayTable;
-});
 
-module.exports = connection;
+export default connection;

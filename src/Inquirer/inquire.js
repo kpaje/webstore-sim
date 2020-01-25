@@ -1,5 +1,4 @@
 import inquirer from "inquirer";
-import connection from "../database/config";
 import { sqlQuery } from "../database/sqlQuery";
 import {
   inputBuy,
@@ -40,18 +39,6 @@ class Query {
 }
 
 export const inquire = {
-  routeInput: function(response) {
-    var input = response.command;
-    if (input === "buy") {
-      inquire.buy();
-    } else if (input === "sell") {
-      inquire.sell();
-    } else if (input === "update-price") {
-      inquire.updatePrice();
-    } else if (input === "exit") {
-      connection.end();
-    }
-  },
   buy: function() {
     new Query(inputBuy, inputQTY).processBuy();
   },

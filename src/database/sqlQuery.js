@@ -1,4 +1,4 @@
-import connection from "./config";
+import connection from "./connection";
 
 export const sqlQuery = {
   runQuery: function(sql, data) {

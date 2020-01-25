@@ -1,4 +1,4 @@
-import connection from "./database/config";
+import connection from "./database/connection";
 import globalUI from "./views/globalUI";
 
 connection.connect(function(err) {
