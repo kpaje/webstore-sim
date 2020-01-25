@@ -10,6 +10,21 @@ import {
 } from "./prompts";
 import views from "./views";
 
+class Query {
+	constructor(promptID, promptQTY) {
+		this.promptID = promptID;
+		this.promptQTY = promptQTY;
+	}
+
+	processQuery() {
+		const prompts = [this.promptID.promptID(), this.promptQTY.promptQTY()];
+		inquirer.prompt(prompts).then(function(data) {
+			sqlQuery.buy(data.id, data.qty);
+			views.globalUI();
+		});
+	}
+}
+
 export const inquire = {
 	routeInput: function(response) {
 		var input = response.command;
@@ -27,27 +42,20 @@ export const inquire = {
 		return inquirer.prompt(populateMenu).then(inquire.routeInput);
 	},
 	buy: function() {
-		inquirer
-			.prompt([inputBuy.promptID(), inputQTY.promptQTY()])
-			.then(function(data) {
-				sqlQuery.buy(data.id, data.qty);
-				views.globalUI();
-			});
+		new Query(inputBuy, inputQTY).processQuery();
 	},
 	sell: function() {
-		inquirer
-			.prompt([inputSell.promptID(), inputQTY.promptQTY()])
-			.then(function(data) {
-				sqlQuery.sell(data.id, data.qty);
-				views.globalUI();
-			});
+		const prompts = [inputSell.promptID(), inputQTY.promptQTY()];
+		inquirer.prompt(prompts).then(function(data) {
+			sqlQuery.sell(data.id, data.qty);
+			views.globalUI();
+		});
 	},
 	updatePrice: function() {
-		inquirer
-			.prompt([inputUpdate.promptID(), inputPrice.promptQTY()])
-			.then(function(data) {
-				sqlQuery.updatePrice(data.id, data.price);
-				views.globalUI();
-			});
+		const prompts = [inputUpdate.promptID(), inputPrice.promptQTY()];
+		inquirer.prompt(prompts).then(function(data) {
+			sqlQuery.updatePrice(data.id, data.price);
+			views.globalUI();
+		});
 	}
 };

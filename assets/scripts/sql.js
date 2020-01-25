@@ -1,10 +1,10 @@
 import connection from "./config";
-import "console.table";
 
 export const sqlQuery = {
 	runQuery: function(sql, data) {
 		connection.query(sql, data, function(err, res) {
 			if (err) throw err;
+			return res;
 		});
 	},
 	all: function() {
