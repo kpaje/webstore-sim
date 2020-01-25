@@ -1,4 +1,4 @@
-require("inquirer");
+import "inquirer";
 import eventHandlers from "../eventHandlers";
 
 class Prompt {

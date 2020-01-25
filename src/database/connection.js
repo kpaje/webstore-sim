@@ -1,6 +1,6 @@
-const mysql = require("mysql");
-const config = require("./config");
-const view = require("../views");
+import mysql from "mysql";
+import config from "./config";
+import view from "../views";
 
 const connection = mysql.createConnection(config);
 connection.connect(function(err) {

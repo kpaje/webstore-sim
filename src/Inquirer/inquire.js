@@ -1,4 +1,4 @@
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
 import connection from "../database/config";
 import { sqlQuery } from "../database/sql";
 import {
@@ -51,9 +51,6 @@ export const inquire = {
     } else if (input === "exit") {
       connection.end();
     }
-  },
-  createMenuPrompts: function(populateMenu) {
-    return inquirer.prompt(populateMenu).then(inquire.routeInput);
   },
   buy: function() {
     new Query(inputBuy, inputQTY).processBuy();
