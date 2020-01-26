@@ -1,8 +1,8 @@
 import "console.table";
 import eventHandlers from "../eventHandlers";
 
-function table() {
+function showTable() {
   return eventHandlers.formatTableData(console.table);
 }
 
-export default table;
+export default showTable;

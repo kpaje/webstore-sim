@@ -5,7 +5,7 @@ import connection from "./database/connection";
 
 const eventHandlers = {
   validateUserInput: function(input) {
-    if (input.length < 1) {
+    if (input.length === 0) {
       console.log("missing input".red);
       return false;
     } else {
@@ -13,11 +13,11 @@ const eventHandlers = {
     }
   },
   formatTableData: function(table) {
-    sqlQuery.allData().then(function(res) {
-      table(res);
+    sqlQuery.allData().then(function(result) {
+      table(result);
     });
   },
-  routeInput: function(userInput) {
+  routeUserInput: function(userInput) {
     var input = userInput.command;
     if (input === "buy") {
       inquire.buy();
@@ -28,6 +28,20 @@ const eventHandlers = {
     } else if (input === "exit") {
       connection.end();
     }
+  },
+  promiseQueryResult(query) {
+    function verifyResult(resolve) {
+      return (error, data) => {
+        if (data === undefined) {
+          throw error;
+        } else {
+          resolve(data);
+        }
+      };
+    }
+    return data => {
+      connection.query(query, verifyResult(data));
+    };
   }
 };
 

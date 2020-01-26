@@ -9,13 +9,13 @@ import {
 
 const inquire = {
   buy: function() {
-    new ProcessInquiry(inputBuy, inputQuantity).processBuy();
+    new ProcessInquiry(inputBuy, inputQuantity).processBuyMethod();
   },
   sell: function() {
-    new ProcessInquiry(inputSell, inputQuantity).processSell();
+    new ProcessInquiry(inputSell, inputQuantity).processSellMethod();
   },
   updatePrice: function() {
-    new ProcessInquiry(inputUpdate, inputPrice).processUpdatePrice();
+    new ProcessInquiry(inputUpdate, inputPrice).processUpdatePriceMethod();
   }
 };
 

@@ -1,18 +1,18 @@
-import table from "./table";
-import menuUI from "./menuUI";
+import showTable from "./table";
+import showMenuUI from "./menuUI";
 
 function assembleInterface() {
   //prevents interface overlapping table when it is fetching data
   setTimeout(() => {
-    menuUI();
+    showMenuUI();
   }, 10);
-  table();
+  showTable();
 }
 
-function globalUI() {
+function showGlobalUI() {
   console.clear();
   console.log("WELCOME TO THE BAMAZON STORE 1998".magenta);
   assembleInterface();
 }
 
-export default globalUI;
+export default showGlobalUI;

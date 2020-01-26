@@ -7,9 +7,9 @@ class Mutation {
 
   sendSQLQuery(id, input) {
     const data = [input, id];
-    function resolveQuery(err, res) {
-      if (err) throw err;
-      return res;
+    function resolveQuery(error, result) {
+      if (error) throw error;
+      return result;
     }
     function runQuery(query, data) {
       connection.query(query, data, resolveQuery());

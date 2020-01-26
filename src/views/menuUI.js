@@ -3,11 +3,11 @@ import eventHandlers from "../eventHandlers";
 import { inputMenuOptions } from "../Inquirer/prompts";
 
 function createMenuInterface(menuOptions) {
-  return inquirer.prompt(menuOptions).then(eventHandlers.routeInput);
+  return inquirer.prompt(menuOptions).then(eventHandlers.routeUserInput);
 }
 
-function menuUI() {
+function showMenuUI() {
   return createMenuInterface(inputMenuOptions.promptMenuOptions());
 }
 
-export default menuUI;
+export default showMenuUI;

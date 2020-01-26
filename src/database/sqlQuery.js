@@ -1,4 +1,4 @@
-import connection from "./connection";
+import eventHandlers from "../eventHandlers";
 import {
   buyProduct,
   sellProduct,
@@ -8,16 +8,9 @@ import {
 const sqlQuery = {
   allData: function() {
     const query = "SELECT * FROM products";
-    return new Promise(function(resolve, reject) {
-      connection.query(query, function(error, result) {
-        if (result === undefined) {
-          reject(new Error("Error result is undefined"));
-        } else {
-          resolve(result);
-        }
-      });
-    });
+    return new Promise(eventHandlers.promiseQueryResult(query));
   },
+
   buy: function(id, input) {
     buyProduct(id, input);
   },
@@ -30,3 +23,14 @@ const sqlQuery = {
 };
 
 export default sqlQuery;
+
+//   return new Promise(function(resolve, reject) {
+//     connection.query(query, function(error, result) {
+//       if (result === undefined) {
+//         reject(new Error("Error result is undefined"));
+//       } else {
+//         resolve(result);
+//       }
+//     });
+//   });
+// },

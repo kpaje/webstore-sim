@@ -1,41 +1,41 @@
 import inquirer from "inquirer";
 import sqlQuery from "../database/sqlQuery";
-import globalUI from "../views/globalUI";
+import showGlobalUI from "../views/globalUI";
 
 class ProcessInquiry {
-  constructor(promptItemID, promptItemAmount) {
-    this.promptItemID = promptItemID;
-    this.promptItemAmount = promptItemAmount;
+  constructor(itemID, itemAmount) {
+    this.itemID = itemID;
+    this.itemAmount = itemAmount;
   }
 
-  processBuy() {
+  processBuyMethod() {
     const prompts = [
-      this.promptItemID.promptItemID(),
-      this.promptItemAmount.promptItemAmount()
+      this.itemID.promptItemID(),
+      this.itemAmount.promptItemAmount()
     ];
     inquirer.prompt(prompts).then(function(data) {
       sqlQuery.buy(data.id, data.qty);
-      globalUI();
+      showGlobalUI();
     });
   }
-  processSell() {
+  processSellMethod() {
     const prompts = [
-      this.promptItemID.promptItemID(),
-      this.promptItemAmount.promptItemAmount()
+      this.itemID.promptItemID(),
+      this.itemAmount.promptItemAmount()
     ];
     inquirer.prompt(prompts).then(function(data) {
       sqlQuery.sell(data.id, data.qty);
-      globalUI();
+      showGlobalUI();
     });
   }
-  processUpdatePrice() {
+  processUpdatePriceMethod() {
     const prompts = [
-      this.promptItemID.promptItemID(),
-      this.promptItemAmount.promptItemAmount()
+      this.itemID.promptItemID(),
+      this.itemAmount.promptItemAmount()
     ];
     inquirer.prompt(prompts).then(function(data) {
       sqlQuery.updatePrice(data.id, data.price);
-      globalUI();
+      showGlobalUI();
     });
   }
 }
