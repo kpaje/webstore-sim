@@ -1,4 +1,5 @@
 import connection from "../connection";
+import eventHandlers from "../../eventHandlers";
 
 class Mutation {
   constructor(query) {

@@ -23,14 +23,3 @@ const sqlQuery = {
 };
 
 export default sqlQuery;
-
-//   return new Promise(function(resolve, reject) {
-//     connection.query(query, function(error, result) {
-//       if (result === undefined) {
-//         reject(new Error("Error result is undefined"));
-//       } else {
-//         resolve(result);
-//       }
-//     });
-//   });
-// },
