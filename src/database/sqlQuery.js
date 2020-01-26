@@ -1,27 +1,31 @@
 import connection from "./connection";
-import { queryBuy, querySell, queryUpdatePrice } from "./mutation/mutations";
+import {
+  buyProduct,
+  sellProduct,
+  updateProductPrice
+} from "./mutation/mutations";
 
 const sqlQuery = {
   allData: function() {
-    const sql = "SELECT * FROM products";
+    const query = "SELECT * FROM products";
     return new Promise(function(resolve, reject) {
-      connection.query(sql, function(err, res) {
-        if (res === undefined) {
-          reject(new Error("Error res is undefined"));
+      connection.query(query, function(error, result) {
+        if (result === undefined) {
+          reject(new Error("Error result is undefined"));
         } else {
-          resolve(res);
+          resolve(result);
         }
       });
     });
   },
   buy: function(id, input) {
-    queryBuy(id, input);
+    buyProduct(id, input);
   },
   sell: function(id, input) {
-    querySell(id, input);
+    sellProduct(id, input);
   },
   updatePrice: function(id, input) {
-    queryUpdatePrice(id, input);
+    updateProductPrice(id, input);
   }
 };
 

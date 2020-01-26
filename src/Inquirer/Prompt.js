@@ -2,27 +2,28 @@ import "inquirer";
 import eventHandlers from "../eventHandlers";
 
 class Prompt {
-  constructor(message, name) {
-    this.message = message;
-    this.name = name;
+  constructor(selectedMenuChoice, itemName) {
+    this.selectedMenuChoice = selectedMenuChoice;
+    this.itemName = itemName;
   }
-  promptID() {
+  promptItemID() {
     return {
       type: "input",
-      message: "What item would you like to " + `${this.message}` + "?",
+      message:
+        "What item would you like to " + `${this.selectedMenuChoice}` + "?",
       name: "id",
-      validate: eventHandlers.validateInput
+      validate: eventHandlers.validateUserInput
     };
   }
-  promptQTY() {
+  promptItemAmount() {
     return {
       type: "input",
       message: "Input amount",
-      name: `${this.name}`,
-      validate: eventHandlers.validateInput
+      name: `${this.itemName}`,
+      validate: eventHandlers.validateUserInput
     };
   }
-  promptMenu() {
+  promptMenuOptions() {
     return [
       {
         type: "list",

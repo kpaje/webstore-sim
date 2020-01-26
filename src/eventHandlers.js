@@ -4,7 +4,7 @@ import inquire from "./Inquirer/inquire";
 import connection from "./database/connection";
 
 const eventHandlers = {
-  validateInput: function(input) {
+  validateUserInput: function(input) {
     if (input.length < 1) {
       console.log("missing input".red);
       return false;
@@ -12,13 +12,13 @@ const eventHandlers = {
       return true;
     }
   },
-  populateTableData: function(table) {
+  formatTableData: function(table) {
     sqlQuery.allData().then(function(res) {
       table(res);
     });
   },
-  routeInput: function(response) {
-    var input = response.command;
+  routeInput: function(userInput) {
+    var input = userInput.command;
     if (input === "buy") {
       inquire.buy();
     } else if (input === "sell") {

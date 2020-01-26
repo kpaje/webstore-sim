@@ -1,13 +1,13 @@
 import inquirer from "inquirer";
 import eventHandlers from "../eventHandlers";
-import { inputMenu } from "../Inquirer/prompts";
+import { inputMenuOptions } from "../Inquirer/prompts";
 
-function createMenuPrompts(populateMenu) {
-  return inquirer.prompt(populateMenu).then(eventHandlers.routeInput);
+function createMenuInterface(menuOptions) {
+  return inquirer.prompt(menuOptions).then(eventHandlers.routeInput);
 }
 
 function menuUI() {
-  return createMenuPrompts(inputMenu.promptMenu());
+  return createMenuInterface(inputMenuOptions.promptMenuOptions());
 }
 
 export default menuUI;

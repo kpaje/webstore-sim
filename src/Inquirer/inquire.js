@@ -3,16 +3,16 @@ import {
   inputBuy,
   inputSell,
   inputUpdate,
-  inputQTY,
+  inputQuantity,
   inputPrice
 } from "./prompts";
 
 const inquire = {
   buy: function() {
-    new ProcessInquiry(inputBuy, inputQTY).processBuy();
+    new ProcessInquiry(inputBuy, inputQuantity).processBuy();
   },
   sell: function() {
-    new ProcessInquiry(inputSell, inputQTY).processSell();
+    new ProcessInquiry(inputSell, inputQuantity).processSell();
   },
   updatePrice: function() {
     new ProcessInquiry(inputUpdate, inputPrice).processUpdatePrice();

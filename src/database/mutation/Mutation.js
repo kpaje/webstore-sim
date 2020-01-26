@@ -1,20 +1,20 @@
 import connection from "../connection";
 
 class Mutation {
-  constructor(sql) {
-    this.sql = sql;
+  constructor(query) {
+    this.query = query;
   }
 
-  createSQLQuery(id, input) {
+  sendSQLQuery(id, input) {
     const data = [input, id];
     function resolveQuery(err, res) {
       if (err) throw err;
       return res;
     }
-    function runQuery(sql, data) {
-      connection.query(sql, data, resolveQuery());
+    function runQuery(query, data) {
+      connection.query(query, data, resolveQuery());
     }
-    runQuery(this.sql, data);
+    runQuery(this.query, data);
   }
 }
 
