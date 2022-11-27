@@ -1,7 +1,7 @@
 import connection from "./database/connection";
-import globalUI from "./views/globalUI";
+import globalUserInterface from "./views/globalUserInterface";
 
 connection.connect(function (err) {
 	if (err) throw err;
-	globalUI();
+	globalUserInterface();
 });

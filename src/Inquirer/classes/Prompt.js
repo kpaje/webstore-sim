@@ -12,7 +12,7 @@ class Prompt {
 			message:
 				"What item would you like to " + `${this.selectedMenuChoice}` + "?",
 			name: "id",
-			validate: eventHandlers.validateUserInput
+			validate: eventHandlers.validateUserInput,
 		};
 	}
 	promptItemAmount() {
@@ -20,7 +20,7 @@ class Prompt {
 			type: "input",
 			message: "Input amount",
 			name: `${this.itemName}`,
-			validate: eventHandlers.validateUserInput
+			validate: eventHandlers.validateUserInput,
 		};
 	}
 	promptMenuOptions() {
@@ -29,8 +29,8 @@ class Prompt {
 				type: "list",
 				message: "Please select a command",
 				choices: ["buy", "sell", "update-price", "exit"],
-				name: "command"
-			}
+				name: "command",
+			},
 		];
 	}
 }
