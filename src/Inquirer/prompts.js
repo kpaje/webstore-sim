@@ -1,18 +1,11 @@
 import "inquirer";
 import Prompt from "./classes/Prompt";
 
-const inputMenuOptions = new Prompt();
-const inputBuy = new Prompt("buy");
-const inputSell = new Prompt("sell");
-const inputUpdate = new Prompt("price update");
-const inputQuantity = new Prompt(undefined, "qty");
-const inputPrice = new Prompt(undefined, "price");
+const mainMenu = new Prompt();
+const buyMenu = new Prompt("buy");
+const sellMenu = new Prompt("sell");
+const updateMenu = new Prompt("price update");
+const quantity = new Prompt(undefined, "qty");
+const price = new Prompt(undefined, "price");
 
-export {
-	inputMenuOptions,
-	inputBuy,
-	inputSell,
-	inputUpdate,
-	inputQuantity,
-	inputPrice
-};
+export { mainMenu, buyMenu, sellMenu, updateMenu, quantity, price };

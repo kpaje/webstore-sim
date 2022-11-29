@@ -1,12 +1,14 @@
 import showTable from "./table";
-import showMenuUI from "./menuUI";
+import showMenuUserInterface from "./menuUserInterface";
 
 function assembleInterface() {
 	//prevents interface overlapping table when it is fetching data
 	setTimeout(() => {
-		showMenuUI();
-	}, 10);
-	showTable();
+		showTable();
+	}, 20);
+	setTimeout(() => {
+		showMenuUserInterface();
+	}, 20);
 }
 
 function globalUserInterface() {

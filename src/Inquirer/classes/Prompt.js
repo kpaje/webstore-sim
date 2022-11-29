@@ -2,15 +2,15 @@ import "inquirer";
 import eventHandlers from "../../eventHandlers";
 
 class Prompt {
-	constructor(selectedMenuChoice, itemName) {
-		this.selectedMenuChoice = selectedMenuChoice;
+	constructor(selectedMenuItem, itemName) {
+		this.selectedMenuItem = selectedMenuItem;
 		this.itemName = itemName;
 	}
 	promptItemID() {
 		return {
 			type: "input",
 			message:
-				"What item would you like to " + `${this.selectedMenuChoice}` + "?",
+				"What item would you like to " + `${this.selectedMenuItem}` + "?",
 			name: "id",
 			validate: eventHandlers.validateUserInput,
 		};
@@ -23,7 +23,7 @@ class Prompt {
 			validate: eventHandlers.validateUserInput,
 		};
 	}
-	promptMenuOptions() {
+	promptMenuItems() {
 		return [
 			{
 				type: "list",

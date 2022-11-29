@@ -2,7 +2,7 @@ import inquirer from "inquirer";
 import sqlQuery from "../../database/sqlQuery";
 import globalUserInterface from "../../views/globalUserInterface";
 
-class ProcessInquiry {
+class Inquiry {
 	constructor(itemID, amount) {
 		this.itemID = itemID;
 		this.itemAmount = amount;
@@ -13,7 +13,7 @@ class ProcessInquiry {
 			this.itemID.promptItemID(),
 			this.itemAmount.promptItemAmount(),
 		];
-		inquirer.prompt(prompts).then(function (data) {
+		inquirer.prompt(prompts).then((data) => {
 			sqlQuery.buy(data.id, data.qty);
 			globalUserInterface();
 		});
@@ -23,7 +23,7 @@ class ProcessInquiry {
 			this.itemID.promptItemID(),
 			this.itemAmount.promptItemAmount(),
 		];
-		inquirer.prompt(prompts).then(function (data) {
+		inquirer.prompt(prompts).then((data) => {
 			sqlQuery.sell(data.id, data.qty);
 			globalUserInterface();
 		});
@@ -40,4 +40,4 @@ class ProcessInquiry {
 	}
 }
 
-export default ProcessInquiry;
+export default Inquiry;
